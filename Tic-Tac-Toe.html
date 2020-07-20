@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>[web]Mid_term 정바다</title>
+    <script>
+    var cells=[ [0,0,0],[0,0,0],[0,0,0] ];
+    var arrid1=[0,1,2];
+    var arrid2=[0,1,2];
+    var turn = 1;
+    var full=0;
+    var cnt=0;
+    var you=0;
+    var computer=0;
+    var draw=0;
+    var i=0;
+    var j=0;
+    var k=0;
+
+
+
+    function clickCell(row,col)
+    {
+        if (cells[row][col] > 0) {
+        }
+        else
+        {
+            if (turn == 1)
+            {
+                document.getElementById("N"+row+col).innerHTML = "<img src = 'X.gif' height='100' width='100'>";
+                cells[row][col]=1;
+                turn =2;
+                cnt = cnt + 1;
+                computerturn();
+            }
+            else
+            {   
+                computerturn();
+            }
+        }
+        result();
+    }
+
+    function computerturn()
+    {
+        if (turn==2)
+        {   
+            if(cells > 0)
+            {}
+            else    
+            {
+                while(cnt<9)
+                {
+                    a = random(arrid1);
+                    b = random(arrid2);
+                    if(cells[a][b] == 0)
+                        break;
+                }
+                document.getElementById("N"+a+b).innerHTML = "<img src = 'O.gif' height='100' width='100' >";
+                cells[a][b]=2;
+                turn=1;
+                cnt = cnt +1;
+            }
+        }
+    }
+
+    function random(a)
+    {
+        return a[Math.floor(Math.random()*a.length)];
+    }
+
+    function userWin()
+    {
+        if (cells[0][0]==1 && cells[0][1]==1 && cells[0][2]==1)
+        {
+            full=1;
+        }
+        if (cells[1][0]==1 && cells[1][1]==1 && cells[1][2]==1)
+        {
+            full=1;
+        }
+        if (cells[2][0]==1 && cells[2][1]==1 && cells[2][2]==1)
+        {
+            full=1;
+        }
+        if (cells[0][0]==1 && cells[1][0]==1 && cells[2][0]==1)
+        {
+            full=1;
+        }
+        if (cells[0][1]==1 && cells[1][1]==1 && cells[2][1]==1)
+        {
+            full=1;
+        }
+        if (cells[0][2]==1 && cells[1][2]==1 && cells[2][2]==1)
+        {
+            full=1;
+        }
+        if (cells[0][0]==1 && cells[1][1]==1 && cells[2][2]==1)
+        {
+            full=1;
+        }
+        if (cells[0][2]==1 && cells[1][1]==1 && cells[2][0]==1)
+        {
+            full=1;
+        }
+    }
+
+    function comWin()
+    {
+        if (cells[0][0]==2 && cells[0][1]==2 && cells[0][2]==2)
+        {
+            full=2;
+        }
+        if (cells[1][0]==2 && cells[1][1]==2 && cells[1][2]==2)
+        {
+            full=2;
+        }
+        if (cells[2][0]==2 && cells[2][1]==2 && cells[2][2]==2)
+        {
+            full=2;
+        }
+        if (cells[0][0]==2 && cells[1][0]==2 && cells[2][0]==2)
+        {
+            full=2;
+        }
+        if (cells[0][1]==2 && cells[1][1]==2 && cells[2][1]==2)
+        {
+            full=2;
+        }
+        if (cells[0][2]==2 && cells[1][2]==2 && cells[2][2]==2)
+        {
+            full=2;
+        }
+        if (cells[0][0]==2 && cells[1][1]==2 && cells[2][2]==2)
+        {
+            full=2;
+        }
+        if (cells[0][2]==2 && cells[1][1]==2 && cells[2][0]==2)
+        {
+            full=2;
+        }
+    }
+
+    function drawFun()
+    {
+        if (cells[0][0] !== 0 && cells[0][1] !== 0 && cells[0][2] !== 0 && cells[1][0] !== 0 && cells[1][1] !== 0 && cells[1][2] !== 0 && cells[2][0] !== 0 &&cells[2][1] !== 0 && cells[2][2] !== 0 && full == 0)
+            full = 3;
+    }
+
+    function result() {
+            userWin();
+            comWin();
+            drawFun();
+            if (full==1)
+            {   
+                alert("You Win.");
+                i++;
+            }
+            if (full==2)
+            {
+                alert("Computer Win.");
+                j++;
+            }
+            if (full==3)
+            { 
+                alert("Draw.");
+                k++;
+            }   
+            if (full!==0)
+            {   
+                document.count.YOU.value = i;
+                document.count.COM.value = j;
+                document.count.DRAW.value = k;
+                newGame();
+            }
+        }
+
+    function newGame()
+    {
+        for (var i=0; i<3; i++) {
+            for (var j=0; j<3; j++) {
+            cells[i][j]=0;
+            document.getElementById("N"+i+j).innerHTML="<img src = 'blank.gif' height='100' width='100' >";
+            }
+        }
+        turn=1;
+        full=0;
+        cnt=0;
+        clickCell();
+    }
+    </script>
+</head>
+<body>
+    <h2>Tic Tac Toc Game</h2>
+    <form name=count>
+    <table>
+    <td>
+    <table border=1>
+    <tr>
+    <td id="N00" onClick="JavaScript:clickCell(0,0);" src = blank.jpg border=0 height=100 width=100 ></td>
+    <td id="N01" onClick="JavaScript:clickCell(0,1);" src = blank.jpg border=0 height=100 width=100 ></td>
+    <td id="N02" onClick="JavaScript:clickCell(0,2);" src = blank.jpg border=0 height=100 width=100 ></td>
+    </tr>
+    <tr>
+    <td id="N10" onClick="JavaScript:clickCell(1,0);" src = blank.jpg border=0 height=100 width=100 ></td>
+    <td id="N11" onClick="JavaScript:clickCell(1,1);" src = blank.jpg border=0 height=100 width=100 ></td>
+    <td id="N12" onClick="JavaScript:clickCell(1,2);" src = blank.jpg border=0 height=100 width=100 ></td>
+    </tr>
+    <tr>
+    <td id="N20" onClick="JavaScript:clickCell(2,0);" src = blank.jpg border=0 height=100 width=100 ></td>
+    <td id="N21" onClick="JavaScript:clickCell(2,1);" src = blank.jpg border=0 height=100 width=100 ></td>
+    <td id="N22" onClick="JavaScript:clickCell(2,2);" src = blank.jpg border=0 height=100 width=100 ></td>
+    </tr>
+    </table>
+    </td>
+    <td>
+    <table>
+        <h2>score :</h2>
+        <tr><td><input type=text name=YOU size=5></td><td>You</td><td></td></tr>
+        <tr><td><input type=text name=COM size=5></td><td>Computer</td></tr>
+        <tr><td><input type=text name=DRAW size=5></td><td>Draw</td></tr>
+    </table>
+    </td>
+    </table>
+    <input type=button value="New Game" onClick="Javascript:newGame();">
+    </form>
+</html>
